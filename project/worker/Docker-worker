@@ -1,0 +1,6 @@
+FROM ubuntu:18.04
+RUN apt-get update && apt-get install -y python3-pip python-pip
+RUN pip3 install pika redis requests
+WORKDIR /srv
+COPY worker-server.py /srv
+CMD [ "python3", "worker-server.py" ]

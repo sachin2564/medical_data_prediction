@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  annotations:
+    # If the class annotation is not specified it defaults to "gce".
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /predict
+        pathType: Prefix
+        backend:
+          service:
+            name: predict
+            port:
+              number: 8080
+      - path: /medical/*
+        pathType: Prefix
+        backend:
+          service:
+            name: rest
+            port:
+              number: 5000

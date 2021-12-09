@@ -1,0 +1,8 @@
+FROM ubuntu:18.04
+COPY rest-server.py /app/rest-server.py 
+RUN apt-get update && apt-get install -y python3-pip python-pip
+RUN pip3 install --upgrade setuptools
+RUN pip3 install --upgrade pika redis jsonpickle requests
+RUN pip3 install flask
+WORKDIR /app
+CMD ["python3", "rest-server.py" ]
